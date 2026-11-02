@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: 01 salud y colección vacía
+ok 1 - 01 salud y colección vacía
+  ---
+  duration_ms: 123.9111
+  type: 'test'
+  ...
+# Subtest: 02 creación normaliza sin mutar y devuelve 201 Location ETag
+ok 2 - 02 creación normaliza sin mutar y devuelve 201 Location ETag
+  ---
+  duration_ms: 77.6861
+  type: 'test'
+  ...
+# Subtest: 03 actualización y borrado completan CRUD
+ok 3 - 03 actualización y borrado completan CRUD
+  ---
+  duration_ms: 31.3253
+  type: 'test'
+  ...
+# Subtest: 04 validación de campos, tipos, longitudes y controles
+ok 4 - 04 validación de campos, tipos, longitudes y controles
+  ---
+  duration_ms: 48.2495
+  type: 'test'
+  ...
+# Subtest: 05 JSON mal formado, tipo incorrecto y cuerpo excesivo
+ok 5 - 05 JSON mal formado, tipo incorrecto y cuerpo excesivo
+  ---
+  duration_ms: 22.1798
+  type: 'test'
+  ...
+# Subtest: 06 títulos únicos normalizados y rollback de actualización duplicada
+ok 6 - 06 títulos únicos normalizados y rollback de actualización duplicada
+  ---
+  duration_ms: 20.7367
+  type: 'test'
+  ...
+# Subtest: 07 identificadores y recursos ausentes
+ok 7 - 07 identificadores y recursos ausentes
+  ---
+  duration_ms: 26.0285
+  type: 'test'
+  ...
+# Subtest: 08 precondiciones obligatorias y ETag estricto
+ok 8 - 08 precondiciones obligatorias y ETag estricto
+  ---
+  duration_ms: 25.6648
+  type: 'test'
+  ...
+# Subtest: 09 dos ediciones concurrentes no pierden cambios
+ok 9 - 09 dos ediciones concurrentes no pierden cambios
+  ---
+  duration_ms: 30.907
+  type: 'test'
+  ...
+# Subtest: 10 consultas parametrizadas conservan un texto SQL como dato
+ok 10 - 10 consultas parametrizadas conservan un texto SQL como dato
+  ---
+  duration_ms: 16.6965
+  type: 'test'
+  ...
+# Subtest: 11 persistencia real al cerrar y reabrir SQLite
+ok 11 - 11 persistencia real al cerrar y reabrir SQLite
+  ---
+  duration_ms: 35.1944
+  type: 'test'
+  ...
+# Subtest: 12 CSV descargable con comillas y protección contra fórmulas
+ok 12 - 12 CSV descargable con comillas y protección contra fórmulas
+  ---
+  duration_ms: 18.1298
+  type: 'test'
+  ...
+# Subtest: 13 SSE emite alta cambio y borrado después de persistir
+ok 13 - 13 SSE emite alta cambio y borrado después de persistir
+  ---
+  duration_ms: 57.9068
+  type: 'test'
+  ...
+# Subtest: 14 errores no generan notificaciones
+ok 14 - 14 errores no generan notificaciones
+  ---
+  duration_ms: 23.2355
+  type: 'test'
+  ...
+# Subtest: 15 SSE limita clientes y envía heartbeat
+ok 15 - 15 SSE limita clientes y envía heartbeat
+  ---
+  duration_ms: 23.6096
+  type: 'test'
+  ...
+# Subtest: 16 métodos no admitidos y ruta desconocida
+ok 16 - 16 métodos no admitidos y ruta desconocida
+  ---
+  duration_ms: 25.5072
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 921.4928

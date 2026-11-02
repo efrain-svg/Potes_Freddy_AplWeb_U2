@@ -1,0 +1,255 @@
+{
+  "executedAt": "2026-11-02T01:58:04.619Z",
+  "node": "v24.22.1",
+  "cases": [
+    {
+      "name": "Crear",
+      "request": {
+        "method": "POST",
+        "path": "/api/tasks",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Preparar entrega",
+          "description": "Revisar informe"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "etag": "\"1\"",
+          "location": "/api/tasks/1"
+        },
+        "body": {
+          "data": {
+            "id": 1,
+            "title": "Preparar entrega",
+            "description": "Revisar informe",
+            "status": "pending",
+            "version": 1,
+            "createdAt": "2026-11-02T01:58:04.678Z",
+            "updatedAt": "2026-11-02T01:58:04.678Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "Listar",
+      "request": {
+        "method": "GET",
+        "path": "/api/tasks",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "data": [
+            {
+              "id": 1,
+              "title": "Preparar entrega",
+              "description": "Revisar informe",
+              "status": "pending",
+              "version": 1,
+              "createdAt": "2026-11-02T01:58:04.678Z",
+              "updatedAt": "2026-11-02T01:58:04.678Z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Consultar",
+      "request": {
+        "method": "GET",
+        "path": "/api/tasks/1",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "etag": "\"1\""
+        },
+        "body": {
+          "data": {
+            "id": 1,
+            "title": "Preparar entrega",
+            "description": "Revisar informe",
+            "status": "pending",
+            "version": 1,
+            "createdAt": "2026-11-02T01:58:04.678Z",
+            "updatedAt": "2026-11-02T01:58:04.678Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "Actualizar",
+      "request": {
+        "method": "PATCH",
+        "path": "/api/tasks/1",
+        "headers": {
+          "Content-Type": "application/json",
+          "If-Match": "\"1\""
+        },
+        "body": {
+          "status": "done"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "etag": "\"2\""
+        },
+        "body": {
+          "data": {
+            "id": 1,
+            "title": "Preparar entrega",
+            "description": "Revisar informe",
+            "status": "done",
+            "version": 2,
+            "createdAt": "2026-11-02T01:58:04.678Z",
+            "updatedAt": "2026-11-02T01:58:04.702Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "Conflicto",
+      "request": {
+        "method": "PATCH",
+        "path": "/api/tasks/1",
+        "headers": {
+          "Content-Type": "application/json",
+          "If-Match": "\"1\""
+        },
+        "body": {
+          "status": "pending"
+        }
+      },
+      "response": {
+        "status": 412,
+        "headers": {
+          "content-type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "error": {
+            "code": "VERSION_CONFLICT",
+            "message": "La tarea cambió. Consulte la versión actual antes de reintentar.",
+            "details": []
+          }
+        }
+      }
+    },
+    {
+      "name": "Duplicado",
+      "request": {
+        "method": "POST",
+        "path": "/api/tasks",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Preparar entrega"
+        }
+      },
+      "response": {
+        "status": 409,
+        "headers": {
+          "content-type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "error": {
+            "code": "DUPLICATE_TITLE",
+            "message": "Ya existe una tarea con ese título.",
+            "details": []
+          }
+        }
+      }
+    },
+    {
+      "name": "Validación",
+      "request": {
+        "method": "POST",
+        "path": "/api/tasks",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": ""
+        }
+      },
+      "response": {
+        "status": 422,
+        "headers": {
+          "content-type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "error": {
+            "code": "VALIDATION_ERROR",
+            "message": "title tiene longitud o caracteres no permitidos.",
+            "details": []
+          }
+        }
+      }
+    },
+    {
+      "name": "Exportar",
+      "request": {
+        "method": "GET",
+        "path": "/api/tasks/export.csv",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "text/csv; charset=utf-8",
+          "content-disposition": "attachment; filename=\"tareas.csv\""
+        },
+        "body": "id,title,description,status,version,createdAt,updatedAt\r\n\"1\",\"Preparar entrega\",\"Revisar informe\",\"done\",\"2\",\"2026-11-02T01:58:04.678Z\",\"2026-11-02T01:58:04.702Z\"\r\n"
+      }
+    },
+    {
+      "name": "Borrar",
+      "request": {
+        "method": "DELETE",
+        "path": "/api/tasks/1",
+        "headers": {
+          "If-Match": "\"2\""
+        }
+      },
+      "response": {
+        "status": 204,
+        "headers": {},
+        "body": ""
+      }
+    },
+    {
+      "name": "Ausente",
+      "request": {
+        "method": "GET",
+        "path": "/api/tasks/1",
+        "headers": {}
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "content-type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "error": {
+            "code": "NOT_FOUND",
+            "message": "Tarea no encontrada.",
+            "details": []
+          }
+        }
+      }
+    }
+  ]
+}

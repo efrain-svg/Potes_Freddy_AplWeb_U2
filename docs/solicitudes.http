@@ -1,0 +1,58 @@
+@base = http://127.0.0.1:3000
+@id = 1
+@version = 1
+
+### Estado
+GET {{base}}/health
+
+### Crear - 201 (copiar id y ETag para las siguientes peticiones)
+POST {{base}}/api/tasks
+Content-Type: application/json
+
+{"title":"Preparar entrega","description":"Revisar informe","status":"pending"}
+
+### Listar - 200
+GET {{base}}/api/tasks
+
+### Consultar - 200 y ETag
+GET {{base}}/api/tasks/{{id}}
+
+### Editar - 200 (aumenta version; actualizar variable antes de borrar)
+PATCH {{base}}/api/tasks/{{id}}
+Content-Type: application/json
+If-Match: "{{version}}"
+
+{"status":"done"}
+
+### Duplicado - 409 si aún existe Preparar entrega
+POST {{base}}/api/tasks
+Content-Type: application/json
+
+{"title":"Preparar entrega"}
+
+### Validación - 422
+POST {{base}}/api/tasks
+Content-Type: application/json
+
+{"title":"","status":"desconocido"}
+
+### Conflicto - 412 después de una edición exitosa de version 1
+PATCH {{base}}/api/tasks/{{id}}
+Content-Type: application/json
+If-Match: "1"
+
+{"status":"pending"}
+
+### Descargar CSV - 200
+GET {{base}}/api/tasks/export.csv
+
+### SSE - conexión abierta; observar al cambiar tareas desde otra terminal
+GET {{base}}/api/events
+Accept: text/event-stream
+
+### Borrar - 204 (usar la versión actual)
+DELETE {{base}}/api/tasks/{{id}}
+If-Match: "{{version}}"
+
+### Ausente - 404 después del borrado
+GET {{base}}/api/tasks/{{id}}
