@@ -1,0 +1,10 @@
+{
+  "name": "api-tareas-unidad2",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API REST académica de tareas con SQLite, CSV y SSE",
+  "engines": { "node": ">=24 <25" },
+  "scripts": { "start": "node src/server.js", "test": "node --test --test-concurrency=1" },
+  "dependencies": { "express": "5.1.0" }
+}
